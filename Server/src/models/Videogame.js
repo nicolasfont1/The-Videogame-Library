@@ -1,6 +1,6 @@
 const { DataTypes, UUIDV4 } = require('sequelize');
 
-// Exportamos la funcion que define el modelo Videogame.
+// Exporto la funcion que define el modelo Videogame.
 
 module.exports = (database) => {
   database.define('videogame', { // Observar que en la database, este nombre se guarda en plural.
@@ -15,16 +15,19 @@ module.exports = (database) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     platforms: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
-    image: {
+    background_image: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isUrl: true
+      }
     },
     releaseDate: {
       type: DataTypes.STRING,
@@ -33,6 +36,10 @@ module.exports = (database) => {
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    fromDatabase: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
     }
   }, {
     timestamps: false

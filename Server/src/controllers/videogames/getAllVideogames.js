@@ -1,37 +1,48 @@
-//Debo traer 100 videogames y paginarlos cada 15, de cada uno necesito image, name, genres.
 require('dotenv').config();
 const { API_KEY } = process.env;
 const axios = require("axios");
 const { Videogame, Genre } = require("../../db");
+const filterGameDataAPI = require("../../utils/filterGameDataAPI");
+// filterGameDataAPI recibe un array de videojuegos de la API y devuelve cada juego solo con las propiedades que necesito.
 
 const URL = `https://api.rawg.io/api/games?key=${API_KEY}`;
 
 module.exports = async () => {
-    const twentyGamesRaw = (await axios.get(`${URL}`)).data.results
-    if(!twentyGames.length) throw Error("Something went wrong in your petition.")
-    const twentyGames = []
+    // Creo un array que va a contener los 100 videojuegos que necesito. 
+    const hundredGames = []
 
-    twentyGamesRaw.map((game) => {
-        const gameDataFiltered = {
-            id: game.id,
-            name: game.name,
-            image: game.background_image,
-            rating: game.rating,
-            genres: game.genres,
-            fromDatabase: false
+    // Primero traigo los juegos almacenados en la database, incluyendo la relacion que tenga con la tabla Genre.
+    const gamesFromDB = await Videogame.findAll({
+        include: {
+            model: Genre,
+            attributes: ["id", "name"],
+            through: {
+                attributes: []
+            }
         }
-        gameDataFiltered.genres.map(((genre) => {
-            delete genre.slug
-            delete genre.games_count
-            delete genre.image_background
-        }))
-        twentyGames.push(gameDataFiltered)
-    })
+    });
+
+    // Compruebo si habia algún registro guardado en la tabla de videojuegos, de ser así, los pusheo primero
+    // al array hundredGames, dandole prioridad ante los traidos de la API.
+    gamesFromDB.length ? gamesFromDB.forEach((game) => hundredGames.push(game)) : ""
+
+    // Utilizo un ciclo for con cinco iteraciones para obtener los 100 juegos que necesito, ya que en cada solicitud la API
+    // retorna solo 20.
+    for(let i = 1; i <= 5; i++){
+        if(i === 1){
+            const twentyGamesRaw = (await axios.get(`${URL}`)).data.results
+            if(!twentyGamesRaw.length) throw Error("Something went wrong in your petition.")
+            hundredGames.push(filterGameDataAPI(twentyGamesRaw))
+        } else {
+            twentyGamesRaw = (await axios.get(`${URL}&page=${i}`)).data.results
+            if(!twentyGamesRaw.length) throw Error("Something went wrong in your petition.")
+            hundredGames.push(filterGameDataAPI(twentyGamesRaw))
+        }
+    }
     
-    return twentyGames;
+    // Finalmente retorno el array aplicandole el método slice para asegurarme de que efectivamente contenga 100 videojuegos.
+    return hundredGames.flat().slice(0, 100);
 };
 
-// Del objeto data.results necesito las propiedades:
-// name: "", genres: [{}], background_image: "".
 //Debo poder filtrar los juegos por género y/o origen (API/DB).
 //Debo poder ordenar los juegos por orden alfabético y/o rating (de forma ascendente y descendente).

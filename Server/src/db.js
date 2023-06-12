@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
+// Declaro la database, que es una nueva instancia de Sequelize.
 const database = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/videogames`, {
   logging: false, // Toggle para los console.log de las consultas raw en SQL.
   native: false, // Le avisa a Sequelize que puede usar pg-native (para mayor performance).
@@ -26,13 +27,17 @@ let entries = Object.entries(database.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 database.models = Object.fromEntries(capsEntries);
 
-// En database.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
+// En database.models están todos los modelos importados como propiedades,
+// para relacionarlos hago un destructuring.
 const { Videogame, Genre } = database.models;
 
 // Relaciones de modelos.
-Videogame.belongsToMany(Genre, { through: "videogame_genre" });
-Genre.belongsToMany(Videogame, { through: "videogame_genre" });
+Videogame.belongsToMany(Genre, { 
+  through: "videogame_genre", timestamps: false
+});
+Genre.belongsToMany(Videogame, { 
+  through: "videogame_genre", timestamps: false
+});
 
 module.exports = {
   ...database.models, // para poder importar los modelos así: const { Videogame } = require('./db.js');

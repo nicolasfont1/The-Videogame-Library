@@ -1,7 +1,6 @@
 const { DataTypes } = require("sequelize");
 
-// Exportamos la funcion que define el modelo Genre.
-
+// Exporto la funcion que define al modelo Genre.
 module.exports = (database) => {
     database.define("genre", { // Observar que en la database, este nombre se guarda en plural.
         id: {

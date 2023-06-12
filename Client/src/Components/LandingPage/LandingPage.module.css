@@ -1,0 +1,67 @@
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 8px); }
+    100%   { transform: translate(0, -0px); }   
+}
+
+@font-face {
+    font-family: Gameplay;
+    src: url(../../Resources/Gameplay.ttf);
+}
+.pageHolder{
+    background-image: linear-gradient(
+        rgb(0, 0, 0, 0.1),
+        rgb(0, 0, 0, 0.1)
+    ), url(../../Resources/LandingBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    font-family: Gameplay;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    cursor: url(../../Resources/LandingCursor.png), auto;
+}
+
+
+.titleDiv{
+    color: whitesmoke;
+    -webkit-text-stroke: 2px black;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.titleDiv h1 {
+    margin: 0px;
+    height: 110px;
+}
+.titleDiv h2 {
+    margin: 0px;
+}
+.titleDiv h4 {
+    margin: 0px;
+}
+
+
+.keyholeDiv{
+    height: 45px;
+    width: 42px;
+}
+
+.keyholeImage{
+    height: 45px;
+}
+.keyholeImage:hover{
+    transform: scale(1.2);
+}
+
+.link{
+    cursor: url(../../Resources/LandingCursor.png), auto; 
+}
