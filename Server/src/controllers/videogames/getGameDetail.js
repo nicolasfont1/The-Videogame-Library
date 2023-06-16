@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
         const cleanGameDetail = {
             id: rawGameDetail.id,
             name: rawGameDetail.name,
-            background_image: rawGameDetail.background_image,
+            image: rawGameDetail.image,
             platforms: cleanPlatforms,
             description: rawGameDetail.description,
             releaseDate: rawGameDetail.releaseDate,

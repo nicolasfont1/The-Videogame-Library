@@ -41,16 +41,16 @@ videogamesRouter.get("/", async (req, res) => {
 videogamesRouter.get("/:id", getGameDetail); // Recibo una ID por params y retorno el detalle de ese videogame.
 
 videogamesRouter.post("/", async (req, res) => { // Retorna el videojuego creado por el usuario.
-    const { name, description, platforms, background_image, releaseDate, rating, genres } = req.body;
+    const { name, description, platforms, image, releaseDate, rating, genres } = req.body;
     // Hago destructuring de las propiedades que necesita el videogame, las cuales llegan por body.
 
     try {
-        if (!name || !description || !platforms || !background_image || !releaseDate || !rating || !genres) {
+        if (!name || !description || !platforms || !image || !releaseDate || !rating || !genres) {
             // Chequeo que hayan llegado todas las propiedades con exito.
             throw Error("Data missing.")
         } else {
             const newGameCreated = await createVideogame(
-                    name, description, platforms, background_image, releaseDate, rating, genres
+                    name, description, platforms, image, releaseDate, rating, genres
                 );
             // Creo y almaceno un nuevo videojuego en la database, luego lo retorno.
             return res.status(200).json(newGameCreated);

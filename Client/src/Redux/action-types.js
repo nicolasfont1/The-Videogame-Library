@@ -1,0 +1,5 @@
+export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES";
+
+export const PAGE_LOADING = "PAGE_LOADING";
+
+export const  NAME_SEARCH = "NAME_SEARCH";

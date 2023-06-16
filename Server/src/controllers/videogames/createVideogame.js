@@ -1,7 +1,7 @@
 const { Videogame, Genre } = require("../../db");
 
 // Recibo por parámetro las propiedades que posee cada videogame.
-module.exports = async (name, description, platforms, background_image, releaseDate, rating, genres) => {
+module.exports = async (name, description, platforms, image, releaseDate, rating, genres) => {
     
     // Formateo el array que recibo con las plataformas para que sea igual al que poseen los juegos de la API.
     const cleanPlatforms = platforms.map((elem) => {
@@ -34,7 +34,7 @@ module.exports = async (name, description, platforms, background_image, releaseD
         name,
         description,
         platforms: cleanPlatforms,
-        background_image,
+        image,
         releaseDate,
         rating
     }
@@ -42,12 +42,9 @@ module.exports = async (name, description, platforms, background_image, releaseD
     // Creo dentro de la tabla Videogame el registro que contiene el videogame recíen declarado.
     const newVideogameDB = await Videogame.create(videogameRaw)
 
-    // Busco en la DB los géneros cuyos names matcheen con los recibidos por paramétro y los almaceno en genresInDB.
-    const genresInDB = await Genre.findAll({
-        where: {name: matchedGenres.map((genre) => genre.name)}
-    })
     // Utilizando el método addGenres en el videojuego que acabo de almacenar en la DB, declaro su relación con la tabla Genre.
-    await newVideogameDB.addGenres(genresInDB)
+    // Cabe destacar que para esta relación necesitamos matchear las id de los géneros.
+    await newVideogameDB.addGenres(matchedGenres.map((genre) => genre.id))
 
     // Finalmente retorno una "copia" del videogame que acabo de crear, pero no es exactamente el registro creado en la DB.
     return {
@@ -55,7 +52,7 @@ module.exports = async (name, description, platforms, background_image, releaseD
         name: newVideogameDB.name,
         description: newVideogameDB.description,
         platforms: cleanPlatforms,
-        background_image: newVideogameDB.background_image,
+        image: newVideogameDB.image,
         releaseDate: newVideogameDB.releaseDate,
         rating: newVideogameDB.rating,
         genres: matchedGenres,

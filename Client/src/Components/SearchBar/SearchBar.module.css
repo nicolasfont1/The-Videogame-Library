@@ -1,7 +1,41 @@
-.barraSearch{
-    color: black
+.barraSearch {
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding: 1em;
+    background-color: #ccc;
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+    transition: 250ms ease-in-out;
+    margin-top: 10px;
+    padding: 10px;
+    opacity: 0.3;
+}
+.barraSearch:focus {
+    background-color: rgba(255, 255, 255, 0.795);
+    transform: scale(1.02);
+    box-shadow: 1px 1px 10px #969696,
+               -1px -1px 10px #ffffff;
+    opacity: 1;
 }
 
-.botonSearch{
-    color: black
+.botonSearch {
+    color: black;
+    background-color: #ccc;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    height: 38px;
+    width: 38px;
+    margin-left: 10px;
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0.3;
+    transition: 250ms ease-in-out;
+}
+.botonSearch:hover {
+    background-color: rgba(255, 255, 255, 0.795);
+    transform: scale(1.02);
+    box-shadow: 1px 1px 10px #969696,
+               -1px -1px 10px #ffffff;
+    cursor: pointer;
+    opacity: 1;
 }

@@ -16,7 +16,6 @@
     background-size: cover;
     background-position: center;
     min-height: 100vh;
-    font-family: Gameplay;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,6 +27,7 @@
 .titleDiv{
     color: whitesmoke;
     -webkit-text-stroke: 2px black;
+    font-family: Gameplay;
     font-size: 50px;
     display: flex;
     flex-direction: column;
@@ -51,12 +51,16 @@
 
 
 .keyholeDiv{
-    height: 45px;
-    width: 42px;
+    height: auto;
+    width: auto;
+    padding-bottom: 100px
+}
+.keyholeDiv h6 {
+    margin: 2px;
 }
 
 .keyholeImage{
-    height: 45px;
+    height: 50px;
 }
 .keyholeImage:hover{
     transform: scale(1.2);
@@ -64,4 +68,21 @@
 
 .link{
     cursor: url(../../Resources/LandingCursor.png), auto; 
+}
+
+
+.landingInfoDiv{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 10px;
+    font-size: large;
+    color: rgba(193, 210, 216, 0.753);
+    text-shadow: 1px 1px 5px #000000;
+}
+.landingInfoDiv h6 {
+    margin: 5px;
+}
+.landingInfoDiv span {
+    color: dimgray
 }

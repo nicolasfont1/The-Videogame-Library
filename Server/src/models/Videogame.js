@@ -22,7 +22,7 @@ module.exports = (database) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false
     },
-    background_image: {
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
