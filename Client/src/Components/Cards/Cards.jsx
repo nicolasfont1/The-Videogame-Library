@@ -1,7 +1,9 @@
 import style from "./Cards.module.css";
 import Card from "../Card/Card";
+import { useSelector } from "react-redux";
 
 const Cards = ({globalVideogames}) => {
+   const pageLoading = useSelector((state) => state.pageLoading);
 
     return(
         <div className={style.containerDiv}>

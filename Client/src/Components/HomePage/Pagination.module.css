@@ -1,0 +1,49 @@
+.paginationDiv{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   margin-top: 1.5rem;
+   margin-bottom: 1rem;
+}
+
+.paginationDiv button{
+   background-color: #ccc;
+   color: rgba(0, 0, 0, 0.7);
+   width: 30px;
+   height: 30px;
+   font-family: inherit;
+   font-weight: 600;
+   font-size: 14px;
+   margin: 0 10px;
+   border-radius: 50%;
+   cursor: pointer;
+   opacity: 0.3;
+   border: none;
+   box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+   transition: 250ms ease-in-out;
+}
+
+.paginationDiv button:hover{
+   background-color: rgba(255, 255, 255, 0.795);
+   transform: scale(1.05);
+   box-shadow: 1px 1px 7px #969696,
+      -1px -1px 7px #ffffff;
+   cursor: pointer;
+   opacity: 1;
+}
+
+.paginationDiv button.activePage{
+   font-weight: 900;
+   border-color: rgb(16, 16, 16);
+   background: rgb(255, 228, 0);
+   color: rgb(16, 16, 16);
+   opacity: 0.8;
+   box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.paginationDiv button.activePage:hover{
+   box-shadow: none;
+   transform: none;
+   opacity: 0.8;
+   box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.3);
+}
