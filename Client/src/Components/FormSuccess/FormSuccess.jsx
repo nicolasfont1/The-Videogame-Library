@@ -1,7 +1,6 @@
 import style from "./FormSuccess.module.css";
 import sonicSuccess from "../../Resources/sonicSuccess.gif"
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import { Link } from "react-router-dom"
 
 const FormSuccess = () => {

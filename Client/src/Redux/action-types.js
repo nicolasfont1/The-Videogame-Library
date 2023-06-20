@@ -11,3 +11,5 @@ export const CREATE_GAME = "CREATE_GAME";
 export const ORDER = "ORDER";
 
 export const FILTER_ADDED_BY = "FILTER_ADDED_BY";
+
+export const FILTER_GENRES = "FILTER_GENRES";

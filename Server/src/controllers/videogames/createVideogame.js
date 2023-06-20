@@ -3,11 +3,6 @@ const { Videogame, Genre } = require("../../db");
 // Recibo por parámetro las propiedades que posee cada videogame.
 module.exports = async (name, description, platforms, image, releaseDate, rating, genres) => {
 
-   // Formateo el array que recibo con las plataformas para que sea igual al que poseen los juegos de la API.
-   const cleanPlatforms = platforms.map((elem) => {
-      return { name: elem }
-   })
-
    // En genresPromises almaceno la promesa que retorna cada petición a la DB cuando pregunto si el género ingresado
    // existe en la tabla Genre.
    const genresPromises = genres.map(async (genreName) => {
@@ -33,7 +28,7 @@ module.exports = async (name, description, platforms, image, releaseDate, rating
    const videogameRaw = {
       name,
       description,
-      platforms: cleanPlatforms,
+      platforms,
       image,
       releaseDate,
       rating

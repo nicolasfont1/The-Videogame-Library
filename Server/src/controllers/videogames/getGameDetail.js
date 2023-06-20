@@ -35,10 +35,10 @@ module.exports = async (req, res) => {
         const cleanGameDetail = {
             id: rawGameDetail.id,
             name: rawGameDetail.name,
-            image: rawGameDetail.image,
+            image: rawGameDetail.background_image,
             platforms: cleanPlatforms,
-            description: rawGameDetail.description,
-            releaseDate: rawGameDetail.releaseDate,
+            description: rawGameDetail.description_raw,
+            releaseDate: rawGameDetail.released,
             rating: rawGameDetail.rating,
             genres: cleanGenres
         }

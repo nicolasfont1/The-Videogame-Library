@@ -1,14 +1,16 @@
 import style from "./SearchBar.module.css";
 import Filter from "../../Resources/Filter.png"
-import { useState } from "react";
-import { searchByName, pageIsLoading, orderCards, filterCards } from "../../Redux/actions"
+import { useEffect, useState } from "react";
+import { searchByName, pageIsLoading, orderCards, filterAddedBy, filterByGenres } from "../../Redux/actions"
 import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = () => {
    const [gameName, setGameName] = useState("");
    const [actualOrder, setActualOrder] = useState("default")
-   const [cardFilters, setCardFilters] = useState([]);
+   const [actualAddedFilter, setActualAddedFilter] = useState("")
+   const [genreFilters, setGenreFilters] = useState([]);
    const allApiGenres = useSelector((state) => state.allApiGenres)
+   const currentFiltersGS = useSelector((state) => state.currentFilters)
    const dispatch = useDispatch();
 
    const [isOpen, setIsOpen] = useState(false);
@@ -26,24 +28,38 @@ const SearchBar = () => {
    };
 
    const handleOrder = (event) => { //(A-Z = "asc")(Z-A = "des") (Max-min = "max")(Min-max = "min")
-      dispatch(orderCards((event.target.value)))
-      if(event.target.value === "asc"){setActualOrder("A-Z")}
-      else if(event.target.value === "des"){setActualOrder("Z-A")}
-      else if(event.target.value === "max"){setActualOrder("top rated")}
-      else if(event.target.value === "min"){setActualOrder("less rated")}
+      let selectedOrder = event.target.value
+      dispatch(orderCards((selectedOrder)))
+      if(selectedOrder === "asc"){setActualOrder("A-Z")}
+      else if(selectedOrder === "des"){setActualOrder("Z-A")}
+      else if(selectedOrder === "max"){setActualOrder("top rated")}
+      else if(selectedOrder === "min"){setActualOrder("less rated")}
       else{setActualOrder("default")}
    };
 
    const handleFilter = (event) => { //(API = "API")(User = "user")(GenderName)
       let addedFilter = event.target.value;
-      if(addedFilter === "API" || addedFilter === "user"){
-         return dispatch(filterCards(addedFilter))
+      console.log(addedFilter)
+      if(addedFilter === "API" || addedFilter === "user" || addedFilter === "any"){
+         if(addedFilter === "API"){setActualAddedFilter("added by API")}
+         else if(addedFilter === "user"){setActualAddedFilter("added by user")}
+         else {setActualAddedFilter("")}
+         dispatch(filterAddedBy(addedFilter)) // ACA!!
+         return dispatch(filterByGenres(currentFiltersGS.genres))
       }
-      if(!cardFilters.includes(addedFilter)){
-         setCardFilters([...cardFilters, addedFilter])
+      if(!genreFilters.includes(addedFilter)){
+         setGenreFilters([...genreFilters, addedFilter])
       }
    };
 
+   const onCloseGenres = (event) => {
+      setGenreFilters([...genreFilters.filter((genre) => genre !== event.target.value)])
+   };
+
+   useEffect(() => {
+      dispatch(filterAddedBy(currentFiltersGS.addedBy)) // ACA!!
+      dispatch(filterByGenres(genreFilters))
+   }, [genreFilters])
 
    return (
       <div className={style.searchDiv}>
@@ -51,12 +67,21 @@ const SearchBar = () => {
             <label className={style.actualOrderLabel}>
                Actual order:
                <span className={style.filterOrderSpan}>{actualOrder}</span>
-               {actualOrder !== "default" && <button className={style.closeButton} onClick={handleOrder} value="def">✖</button>}
+               {actualOrder !== "default" && <button className={style.closeButton} onClick={handleOrder} value="none">✖</button>}
             </label>
             <label className={style.FilteredLabel}>
                Filtered by:
-               <span className={style.filterOrderSpan}>Messi</span>
+               <span className={style.filterOrderSpan}>{actualAddedFilter}</span>
+               {actualAddedFilter !== "" && <button className={style.closeButton} onClick={handleFilter} value="any">✖</button>}
             </label>
+            {genreFilters.map((genre, index) => {
+               return(
+                  <span id={index}>
+                     <span className={style.filterOrderSpan}>{genre}</span>
+                     <button className={style.closeButton} onClick={onCloseGenres} value={genre}>✖</button>
+                  </span>
+               )
+            })}
          </div>
          <input
             className={style.barraSearch}
@@ -71,11 +96,11 @@ const SearchBar = () => {
             className={style.botonSearch}
             onClick={() => { dispatch(pageIsLoading(true)); dispatch(searchByName(gameName)); setGameName("") }}
          >🔍︎</button>
-         <div className={style.filterDiv}>
-            <img src={Filter} className={style.filterImage} onMouseEnter={toggleFilters} />
+         <div className={style.filterDiv} onMouseEnter={toggleFilters}>
+            <img src={Filter} className={style.filterImage} />
             {isOpen &&
                <div className={style.filterMenuDiv} onMouseLeave={toggleFilters}>
-                  <img src={Filter} className={style.filterImage} onClick={toggleFilters} style={{ left: "20px" }}/>
+                  <img src={Filter} className={style.filterImage} style={{ left: "20px" }}/>
                   <h4 style={{ margin: "0px" }}>Order by</h4>
                   <label>
                      Alphabetical:
@@ -110,6 +135,7 @@ const SearchBar = () => {
                      Added by:
                      <select style={{ marginLeft: "15px" }} name="addedBy" defaultValue="Choose" onChange={handleFilter}>
                         <option value="Choose" disabled>show</option>
+                        <option value="any">Any</option>
                         <option value="API">API</option>
                         <option value="user">User</option>
                      </select>

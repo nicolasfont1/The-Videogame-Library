@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ALL_VIDEOGAMES, PAGE_LOADING, NAME_SEARCH, GET_API_GENRES, CREATE_GAME, ORDER, FILTER_ADDED_BY } from "./action-types";
+import { GET_ALL_VIDEOGAMES, PAGE_LOADING, NAME_SEARCH, GET_API_GENRES, CREATE_GAME, ORDER, FILTER_ADDED_BY, FILTER_GENRES } from "./action-types";
 
 export const getAllHomepage = () => {
    try {
@@ -81,9 +81,16 @@ export const orderCards = (order) => {
    }
 }
 
-export const filterCards = (addedBy) => {
+export const filterAddedBy = (addedBy) => {
    return {
       type: FILTER_ADDED_BY,
       payload: addedBy
+   }
+};
+
+export const filterByGenres = (genresArray) => {
+   return {
+      type: FILTER_GENRES,
+      payload: genresArray
    }
 };

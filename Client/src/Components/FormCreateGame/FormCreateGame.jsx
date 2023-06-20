@@ -103,10 +103,6 @@ const FormCreateGame = () => {
       event.preventDefault()
       dispatch(createGame(gameData))
       setSubmitted(true)
-      setGameData({
-         ...gameData,
-         name: gameData.name + "¡"
-      })
    }
 
    const trendingPlatforms = [

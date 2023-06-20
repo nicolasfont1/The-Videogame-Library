@@ -1,4 +1,4 @@
-import { GET_ALL_VIDEOGAMES, NAME_SEARCH, PAGE_LOADING, GET_API_GENRES, CREATE_GAME, ORDER, FILTER_ADDED_BY } from "./action-types";
+import { GET_ALL_VIDEOGAMES, NAME_SEARCH, PAGE_LOADING, GET_API_GENRES, CREATE_GAME, ORDER, FILTER_ADDED_BY, FILTER_GENRES } from "./action-types";
 
 const initialState = {
    globalVideogames: [],
@@ -7,8 +7,8 @@ const initialState = {
    lastGameCreatedUUID: "",
    pageLoading: true,
    currentFilters: {
-      addedBy: "def",
-      genres: "all"
+      addedBy: "any",
+      genres: []
    }
 }
 
@@ -54,18 +54,22 @@ const reducer = (state = initialState, action) => {
 
       case ORDER:
          let orderedVideogames = [...state.globalVideogames]
+         let orderType = action.payload;
          
-         if(action.payload === "def"){
-            return {
-               ...state,
-               globalVideogames: [...state.copyOfVideogames]
+         if(orderType === "none"){ // Eliminando ordenamientos, apretar la X al lado del span.
+            if(state.currentFilters.addedBy === "any"){ // Controlando estado de filtros
+               return {
+                  ...state,
+                  globalVideogames: [...state.copyOfVideogames]
+               }
             }
-         }
-         if(action.payload === "asc" || action.payload === "des"){
+         }  
+
+         if(orderType === "asc" || orderType === "des"){
             return {
                ...state,
                globalVideogames:
-                  action.payload === "asc"
+                  orderType === "asc"
                   ? orderedVideogames.sort((a, b) => {
                      let nameA = a.name;
                      let nameB = b.name;
@@ -85,7 +89,7 @@ const reducer = (state = initialState, action) => {
             return {
                ...state,
                globalVideogames:
-                  action.payload === "min"
+                  orderType === "min"
                   ? orderedVideogames.sort((a, b) => {
                      let ratingA = a.rating;
                      let ratingB = b.rating;
@@ -109,12 +113,39 @@ const reducer = (state = initialState, action) => {
             ...state,
             globalVideogames:
                action.payload === "API"
-               ? (filteredGames.filter((game) => game.fromDatabase === false), console.log("Messi"))
-               : (filteredGames.filter((game) => game.fromDatabase === true), state.currentFilters = {...state.currentFilters, addedBy: "user"})
+               ? filteredGames.filter((game) => game.fromDatabase === false)
+               : action.payload === "user" //Ternario anidado
+               ? filteredGames.filter((game) => game.fromDatabase === true)
+               : state.copyOfVideogames,
+            currentFilters: {...state.currentFilters, addedBy: action.payload}
          }
+
+      case FILTER_GENRES:
+         let genreFilteredGames = [...state.globalVideogames]
+         let selectedGenres = action.payload
+
+         if(selectedGenres.length > 0){
+            let matchedGames = selectedGenres.map((selecGenre) => {
+               return genreFilteredGames.filter((game) => {
+                  return game.genres.some((genre) => genre.name === selecGenre)
+               })
+            })
+            return {
+               ...state,
+               globalVideogames: matchedGames.flat(), currentFilters: {...state.currentFilters, genres: action.payload}
+            }
+         } else {
+            return {
+                  ...state,
+                  globalVideogames: [...state.globalVideogames], currentFilters: {...state.currentFilters, genres: []}
+               }
+            }
 
       default: return { ...state }
    }
 };
 
 export default reducer;
+
+// Antes de despachar un filtro siempre despachamos el filtro anterior para que el estado global esté siempre
+// actualizado en base a los filtros que tenia antes.
