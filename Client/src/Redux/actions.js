@@ -1,5 +1,9 @@
 import axios from "axios";
-import { GET_ALL_VIDEOGAMES, PAGE_LOADING, NAME_SEARCH, GET_API_GENRES, CREATE_GAME, ORDER, FILTER_ADDED_BY, FILTER_GENRES } from "./action-types";
+import {
+   GET_ALL_VIDEOGAMES, PAGE_LOADING, NAME_SEARCH, 
+   GET_API_GENRES, CREATE_GAME, ORDER, FILTER_ADDED_BY,
+   FILTER_GENRES, SHOWING_SEARCH, CLEAN_VIDEOGAMES
+} from "./action-types";
 
 export const getAllHomepage = () => {
    try {
@@ -15,6 +19,12 @@ export const getAllHomepage = () => {
       window.alert(error.message)
    }
 };
+
+export const cleanGlobalVideogames = () => {
+   return {
+      type: CLEAN_VIDEOGAMES
+   }
+}
 
 export const pageIsLoading = (bool) => {
    try {
@@ -69,7 +79,7 @@ export const createGame = (gameData) => {
             payload: lastGameCreatedUUID
          })
       }
-   } catch (error) { 
+   } catch (error) {
       window.alert(error.message)
    }
 };
@@ -94,3 +104,10 @@ export const filterByGenres = (genresArray) => {
       payload: genresArray
    }
 };
+
+export const setShowingSearch = (bool) => {
+   return {
+      type: SHOWING_SEARCH,
+      payload: bool
+   }
+}

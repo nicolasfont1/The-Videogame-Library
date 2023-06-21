@@ -14,7 +14,7 @@ const Cards = ({globalVideogames}) => {
                         id={game.id}
                         name={game.name}
                         image={game.image}
-                        genres={game.genres.map((genre) => genre.name + " ")}
+                        genres={game.genres?.map((genre) => genre.name + " ")}
                     />
                 })
             }

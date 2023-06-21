@@ -1,10 +1,18 @@
 import style from "./FormSuccess.module.css";
 import sonicSuccess from "../../Resources/sonicSuccess.gif"
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom"
+import { cleanGlobalVideogames, pageIsLoading } from "../../Redux/actions";
+import { useEffect } from "react";
 
 const FormSuccess = () => {
    const lastGameCreatedUUID = useSelector((state) => state.lastGameCreatedUUID)
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+      dispatch(cleanGlobalVideogames());
+      dispatch(pageIsLoading(true))
+   })
 
    return(
       <div className={style.successContainer}>

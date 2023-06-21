@@ -1,5 +1,5 @@
 import style from "./HomePage.module.css";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchHub from "../SearchHub/SearchHub";
 import Cards from "../Cards/Cards";
 import Pagination from "./Pagination";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,30 +8,34 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
-   const globalVideogames = useSelector((state) => state.globalVideogames);
-   const allApiGenres = useSelector((state) => state.allApiGenres)
+   const globalVideogames = useSelector((state) => state.globalVideogames); // globalVideogames contiene los juegos que estoy mostrando.
+   const allApiGenres = useSelector((state) => state.allApiGenres);
    const pageLoading = useSelector((state) => state.pageLoading);
    const dispatch = useDispatch();
 
-   const [currentPage, setCurrentPage] = useState(1);
-   const [cardsPerPage] = useState(15);
+   const [currentPage, setCurrentPage] = useState(1); // State que setea la página actual.
+   const cardsPerPage = 15; // Constante en la que guardo cuantas cards quiero mostrar por página.
 
+   // Pequeños cálculos para obtener el primer y ultimo index de la pagina que estoy mostrando.
    const lastCardIndex = currentPage * cardsPerPage;
    //         30             2       *      15
    const firstCardIndex = lastCardIndex - cardsPerPage;
    //         15                30       -    15
 
-   const currentCards = globalVideogames?.slice(firstCardIndex, lastCardIndex);
+   const currentCards = globalVideogames?.slice(firstCardIndex, lastCardIndex); // Divido globalVidegames segun las cards a mostrar.
 
-   useEffect(() => {
+   useEffect(() => { // useEffect para desactivar el loader de la homepage. 
       if (globalVideogames?.length) dispatch(pageIsLoading(false))
-   }, [globalVideogames?.length])
+   }, [globalVideogames?.length]) // Chequea si globalVideogames cambia su length, ya que se inicia vacio.
 
-   useEffect(() => {
+   useEffect(() => { // useEffect por si hay algun error y deseo recargar la pagina desde la homepage.
       if (globalVideogames?.length < 1) dispatch(getAllHomepage())
       if (allApiGenres?.length < 1) dispatch(getApiGenres())
    }, [globalVideogames?.length])
 
+   useEffect(() => { // useEffect que por cada cambio en globalVideogames setea la currentPage en 1.
+      setCurrentPage(1)
+   }, [globalVideogames])
 
    return (
       <div className={style.homepageDiv}>
@@ -48,15 +52,15 @@ const HomePage = () => {
             <div className={style.informationDiv}>
             </div>
          </div>
-         <SearchBar/>
-         {!pageLoading && <Pagination
+         <SearchHub/>
+         {globalVideogames.length && <Pagination
             totalCards={globalVideogames?.length}
             cardsPerPage={cardsPerPage}
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
          />}
          <Cards globalVideogames={currentCards} />
-         {!pageLoading && <Pagination
+         {globalVideogames.length && <Pagination
             totalCards={globalVideogames?.length}
             cardsPerPage={cardsPerPage}
             setCurrentPage={setCurrentPage}

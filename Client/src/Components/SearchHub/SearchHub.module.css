@@ -1,4 +1,4 @@
-.searchDiv{
+.searchHubDiv{
    display: inline-flex;
    align-items: center;
 }
@@ -13,6 +13,23 @@
 }
 .closeButton:hover{
    transform: scale(1.05);
+}
+
+.cleanSearchButton{
+   border: none;
+   background: none;
+   cursor: pointer;
+   transition: transform 0.1s ease;
+   color: #ccc;
+   opacity: 0.3;
+   font-size: 17px;
+   position: relative;
+   left: 110px;
+}
+.cleanSearchButton:hover{
+   transform: scale(1.08);
+   color: rgba(255, 255, 255, 0.795);
+   opacity: 1;
 }
 
 .actualFiltersDiv{
@@ -43,7 +60,7 @@
 }
 
 .barraSearch {
-   margin-left: 150px;
+   margin-left: 130px;
    height: 20px;
    border: none;
    outline: none;

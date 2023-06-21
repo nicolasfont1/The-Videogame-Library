@@ -77,18 +77,22 @@ const validation = (inputs) => {
 
 
    // ---------------------------------- RELEASEDATE INPUT ------------------------------------
-   if (inputs.releaseDate == "2024-01-01") {
+   if (inputs.releaseDate == "") {
       errors.releaseDate = "Change the default value."
    }
 
 
    // ---------------------------------- RATING INPUT ------------------------------------
-   if (Number(inputs.rating) < 1 || Number(inputs.rating) > 5) {
-      errors.rating = "Rating must be between 1 and 5."
+   if (Number(inputs.rating) < 0 || Number(inputs.rating) > 5) {
+      errors.rating = "Rating must be between 0 and 5."
    }
 
    if (threeOrMoreDecimals.test(inputs.rating)) {
       errors.rating = "Rating number can't have 3 or more decimals."
+   }
+
+   if (inputs.rating == "") {
+      errors.rating = "Change the default value."
    }
 
 
@@ -101,22 +105,3 @@ const validation = (inputs) => {
 };
 
 export default validation;
-
-// Tengo que crear los campos:
-// name (input) chequear que no contenga caracteres raros ej: "", $, %, /, =, ¿?, *, ^, [], {}.
-// image (input) chequear que sea una URL.
-// description (textArea)
-// platforms (input type="checkbox") https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
-// releaseDate (input type="date") https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
-// rating (input type="number") https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number
-// genres (input type="checkbox") https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
-
-// const [gameData, setGameData] = useState({
-//     name: "",
-//     image: "",
-//     description: "",
-//     platforms: [],
-//     releaseDate: "2024-01-01",
-//     rating: "1",
-//     genres: []
-// })

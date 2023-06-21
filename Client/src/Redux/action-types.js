@@ -13,3 +13,7 @@ export const ORDER = "ORDER";
 export const FILTER_ADDED_BY = "FILTER_ADDED_BY";
 
 export const FILTER_GENRES = "FILTER_GENRES";
+
+export const SHOWING_SEARCH = "SHOWING_SEARCH";
+
+export const CLEAN_VIDEOGAMES = "CLEAN_VIDEOGAMES";

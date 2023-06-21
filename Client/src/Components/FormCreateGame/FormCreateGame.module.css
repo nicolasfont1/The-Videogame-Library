@@ -52,22 +52,26 @@
 .lastFourProps {
    display: flex;
    flex-direction: row;
+   text-align: center;
+}
+.lastFourProps p{
+   text-align: center;
+   font-size: 15px;
 }
 
 .platformsDiv {
-   text-align: left;
+   margin-left: 20px;
    width: 25%;
    height: fit-content;
-   overflow: hidden;
+   overflow: visible;
    display: flex;
    flex-direction: column;
+   align-items: center;
 }
 
 .availableOn {
    margin-top: 15px;
-   margin-left: 20px;
    margin-bottom: 5px;
-   text-align: left;
    font-size: 14px;
    opacity: 0.7;
    text-shadow: 1px 1px 5px #00000093;
@@ -93,7 +97,6 @@
 
 .releaseDate {
    margin-top: 15px;
-   margin-left: 20px;
    margin-bottom: 5px;
    text-align: left;
    font-size: 14px;
@@ -120,9 +123,7 @@
 
 .rating{
    margin-top: 15px;
-   margin-left: 20px;
    margin-bottom: 5px;
-   text-align: left;
    font-size: 14px;
    opacity: 0.7;
    text-shadow: 1px 1px 5px #00000093;
@@ -141,6 +142,38 @@
    width: fit-content;
 }
 
+.genresDiv {
+   margin-right: 20px;
+   width: 25%;
+   height: fit-content;
+   overflow: visible;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.genresTitle {
+   margin-top: 15px;
+   margin-bottom: 5px;
+   text-align: left;
+   font-size: 14px;
+   opacity: 0.7;
+   text-shadow: 1px 1px 5px #00000093;
+}
+
+.genresSpan {
+   padding-left: 4px;
+   padding-right: 4px;
+   padding-top: 1px;
+   padding-bottom: 2px;
+   border-radius: 3px;
+   margin-top: 5px;
+   background-color: rgba(128, 128, 128, 0.329);
+   color: rgb(153, 153, 153);
+   font-size: 12px;
+   width: fit-content;
+}
+
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -148,6 +181,31 @@
    width: 45%;
    min-height: 100%;
    height: auto;
+   background-image: linear-gradient(to right top, #191b1f, #202527, #282e2e, #333836, #3f413e);
+}
+
+.errorText{
+   color: rgba(255, 0, 0, 0.842);
+   padding-left: 15px;
+   font-weight: 400;
+}
+
+.closeButton{
+   border: none;
+   background: none;
+   color: #ffdb0c;
+   margin-left: 0px;
+   cursor: pointer;
+   transition: transform 0.1s ease;
+}
+.closeButton:hover{
+   transform: scale(1.05);
+}
+
+.platformsSpan{
+   color: rgba(220, 220, 220, 0.267);
+   margin-left: 10px;
+   font-weight: 400;
 }
 
 @font-face {

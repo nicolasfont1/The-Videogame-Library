@@ -16,6 +16,8 @@ const createVideogame = require("../controllers/videogames/createVideogame");
 // createVideogame recibe por body las propiedades correspondientes a cada videojuego, crea un registro, lo guarda en la tabla
 // videogames de la DB y posteriormente retorna su UUID.
 
+const deleteVideogame = require("../controllers/videogames/deleteVideogame");
+
 // Recordar que /videogames viene por defecto en nuestra ruta debido al middleware ubicado en routes/index.
 
 // Declaro el método HTTP que espera la ruta y luego como primer paramétro, el endpoint, despues como segundo paramétro 
@@ -59,5 +61,7 @@ videogamesRouter.post("/", async (req, res) => { // Crea el videojuego, lo almac
         return res.status(404).json({error: error.message})
     }
 });
+
+videogamesRouter.delete("/:id", deleteVideogame)
 
 module.exports = videogamesRouter;
