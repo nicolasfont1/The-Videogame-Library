@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
-   const globalVideogames = useSelector((state) => state.globalVideogames); // globalVideogames contiene los juegos que estoy mostrando.
+   let globalVideogames = useSelector((state) => state.globalVideogames); // globalVideogames contiene los juegos que estoy mostrando.
    const allApiGenres = useSelector((state) => state.allApiGenres);
    const pageLoading = useSelector((state) => state.pageLoading);
    const dispatch = useDispatch();
@@ -22,15 +22,12 @@ const HomePage = () => {
    const firstCardIndex = lastCardIndex - cardsPerPage;
    //         15                30       -    15
 
-   const currentCards = globalVideogames?.slice(firstCardIndex, lastCardIndex); // Divido globalVidegames segun las cards a mostrar.
+   let currentCards = globalVideogames?.slice(firstCardIndex, lastCardIndex); // Divido globalVidegames segun las cards a mostrar.
 
-   useEffect(() => { // useEffect para desactivar el loader de la homepage. 
-      if (globalVideogames?.length) dispatch(pageIsLoading(false))
-   }, [globalVideogames?.length]) // Chequea si globalVideogames cambia su length, ya que se inicia vacio.
-
-   useEffect(() => { // useEffect por si hay algun error y deseo recargar la pagina desde la homepage.
-      if (globalVideogames?.length < 1) dispatch(getAllHomepage())
-      if (allApiGenres?.length < 1) dispatch(getApiGenres())
+   useEffect(() => { 
+      if (globalVideogames?.length < 1) dispatch(getAllHomepage()) // Si aprieto F5 en homepage.
+      if (globalVideogames?.length > 1) dispatch(pageIsLoading(false)) // Cuando globalVideogames tenga contenido apago el loader.
+      if (allApiGenres?.length < 1) dispatch(getApiGenres()) // Si aprieto F5 en homepage.
    }, [globalVideogames?.length])
 
    useEffect(() => { // useEffect que por cada cambio en globalVideogames setea la currentPage en 1.

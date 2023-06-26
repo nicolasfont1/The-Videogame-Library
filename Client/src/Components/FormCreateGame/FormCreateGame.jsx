@@ -3,7 +3,7 @@ import validation from "./validation";
 import FormSuccess from "../FormSuccess/FormSuccess";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createGame } from "../../Redux/actions"
+import { cleanGlobalVideogames, createGame, getAllHomepage, pageIsLoading } from "../../Redux/actions"
 
 const FormCreateGame = () => {
    const [gameData, setGameData] = useState({ // En este state voy a ir almacenando la información que el user cargue en el form.
@@ -99,8 +99,10 @@ const FormCreateGame = () => {
       }
    }
 
-   const handleSubmit = (event) => {
+   const handleSubmit = async (event) => {
       event.preventDefault()
+      dispatch(cleanGlobalVideogames())
+      dispatch(pageIsLoading(true))
       dispatch(createGame(gameData))
       setSubmitted(true)
    }

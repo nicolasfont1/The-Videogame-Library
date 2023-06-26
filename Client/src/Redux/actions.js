@@ -73,10 +73,10 @@ export const createGame = (gameData) => {
    try {
       const endpoint = 'http://localhost:3001/videogames'
       return async (dispatch) => {
-         const lastGameCreatedUUID = (await axios.post(endpoint, gameData)).data;
+         const lastGameCreated = (await axios.post(endpoint, gameData)).data; // Esto devuelve todas las propiedades del juego.
          return dispatch({
             type: CREATE_GAME,
-            payload: lastGameCreatedUUID
+            payload: lastGameCreated
          })
       }
    } catch (error) {

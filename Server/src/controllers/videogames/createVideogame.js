@@ -41,6 +41,16 @@ module.exports = async (name, description, platforms, image, releaseDate, rating
    // Cabe destacar que para esta relación necesitamos matchear las id de los géneros.
    await newVideogameDB.addGenres(matchedGenres.map((genre) => genre.id))
 
-   // Finalmente retorno el UUID del videogame que acabo de crear, para poder acceder a su detail apenas se cargue el form.
-   return newVideogameDB.id;
+   // Finalmente retorno una copia del videogame que acabo de crear, para poder pushearlo al array de juegos mostrados en pantalla
+   // y acceder a su detalle al instante.
+   return {
+      id: newVideogameDB.id,
+      name: newVideogameDB.name,
+      description: newVideogameDB.description,
+      platforms: newVideogameDB.platforms,
+      image: newVideogameDB.image,
+      releaseDate: newVideogameDB.releaseDate,
+      rating: newVideogameDB.rating,
+      genres: matchedGenres
+   }
 };

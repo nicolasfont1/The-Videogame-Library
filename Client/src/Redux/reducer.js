@@ -42,7 +42,8 @@ const reducer = (state = initialState, action) => {
       case CLEAN_VIDEOGAMES:
          return {
             ...state,
-            globalVideogames: []
+            globalVideogames: [],
+            copyOfVideogames: []
          }
 
       case GET_API_GENRES: // Trae todos los géneros de la API, los guarda en un global state y en la DB.
@@ -63,10 +64,12 @@ const reducer = (state = initialState, action) => {
             pageLoading: action.payload
          }
 
-      case CREATE_GAME: // Guarda la UUID del juego recién creado para poder acceder a su detalle desde el success del form.
+      case CREATE_GAME: // Obtengo el juego recien creado para poder añadirlo a globalVideogames y quedarme con su UUID.
+         let lastGameCreated = action.payload
+
          return {
             ...state,
-            lastGameCreatedUUID: action.payload
+            lastGameCreatedUUID: lastGameCreated.id
          }
 
       case ORDER: // Maneja los cuatro ordenamientos que pueden tener las cards, como así tambien la posibilidad de sacarlos. 

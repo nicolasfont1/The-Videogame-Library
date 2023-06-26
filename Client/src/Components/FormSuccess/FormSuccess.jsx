@@ -1,19 +1,11 @@
 import style from "./FormSuccess.module.css";
 import sonicSuccess from "../../Resources/sonicSuccess.gif"
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom"
-import { cleanGlobalVideogames, pageIsLoading } from "../../Redux/actions";
-import { useEffect } from "react";
 
 const FormSuccess = () => {
-   const lastGameCreatedUUID = useSelector((state) => state.lastGameCreatedUUID)
-   const dispatch = useDispatch()
-
-   useEffect(() => {
-      dispatch(cleanGlobalVideogames());
-      dispatch(pageIsLoading(true))
-   })
-
+   const lastGameCreatedUUID = useSelector((state) => state.lastGameCreatedUUID);
+   
    return(
       <div className={style.successContainer}>
          <h1 className={style.titleH1}>Your game was uploaded <span style={{color: "green"}}>succefully</span></h1>
