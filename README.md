@@ -16,5 +16,7 @@ The technologies that I used to make The Videogame Library are:
 - Redux
 - Express.js
 - Node.js
+- Sequelize
+- PostgreSQL
 
 The API used for this proyect is provided by RAWG Video Games.
