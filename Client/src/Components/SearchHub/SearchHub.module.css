@@ -142,7 +142,7 @@
    width: 400px;
    height: 200px;
    border-radius: 10px;
-   background-color: #ccccccd7;
+   background-color: #cccccc;
    box-shadow: 1px 1px 10px #969696,
       -1px -1px 10px #ffffff;
    display: flex;
@@ -152,4 +152,16 @@
 .filterMenuDiv img {
    position: absolute;
    margin-left: -13px;
+}
+
+.filterMenuOption {
+   display: flex;
+   flex-direction: column;
+   height: 50%;
+   align-items: center;
+   justify-content: center;
+}
+.filterMenuOption h4 {
+   font-size: larger;
+   font-weight: lighter;
 }
