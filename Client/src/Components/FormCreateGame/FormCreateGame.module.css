@@ -13,6 +13,7 @@
    background-position: -250px;
    background-size: cover;
    background-attachment: fixed;
+   position: fixed;
 }
 
 .lookLikeText {
@@ -177,29 +178,63 @@
 
 /* ---------------------------------------------------------------------------------------------- */
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 .formDiv {
    width: 45%;
    min-height: 100%;
    height: auto;
    background-image: linear-gradient(to right top, #191b1f, #202527, #282e2e, #333836, #3f413e);
+   margin-left: 55%;
+   overflow-y: auto;
+}
+
+.addNewGame {
+   font-family: EightBit;
+   font-size: x-large;
+   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.selectForm {
+   background-color: #2025276b;
+   border: none;
+   border-bottom: white 1px solid;
+   color: whitesmoke;
+   margin-left: 10px;
+}
+
+.inputForm {
+   background-color: transparent;
+   border: none;
+   border-bottom: white 1px solid;
+   color: whitesmoke;
+   width: 260px;
+   margin-left: 10px;
 }
 
 .errorText{
    color: rgba(255, 0, 0, 0.842);
-   padding-left: 15px;
-   font-weight: 400;
+   font-weight: 500;
+   font-size: small;
+   margin-top: 5px;
 }
 
 .closeButton{
    border: none;
    background: none;
-   color: #ffdb0c;
+   color: rgba(255, 0, 0, 0.5);
    margin-left: 0px;
    cursor: pointer;
    transition: transform 0.1s ease;
 }
 .closeButton:hover{
    transform: scale(1.05);
+   color: rgba(255, 0, 0);
 }
 
 .platformsSpan{
@@ -208,7 +243,28 @@
    font-weight: 400;
 }
 
+.uploadButton {
+   background: none;
+   color: whitesmoke;
+   border: none;
+   border-bottom: whitesmoke 2px solid;
+   margin-top: 10px;
+   margin-bottom: 25px;
+   font-size: medium;
+   font-family: EightBit;
+   cursor: pointer;
+   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+.uploadButton:disabled {
+   background: none;
+   color: rgba(245, 245, 245, 0.4);
+   border-bottom: rgb(245, 245, 245, 0.4) 2px solid;
+   cursor: default;
+}
+
 @font-face {
    font-family: CardTitle;
    src: url(../../Resources/CardTitle.ttf);
+   font-family: EightBit;
+   src: url(../../Resources/EightBit.ttf);
 }

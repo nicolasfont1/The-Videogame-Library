@@ -158,7 +158,7 @@ const FormCreateGame = () => {
                      <span className={style.genresTitle}>Game genres: </span>
                      {gameData.genres.map((genres, index) => {
                         return (
-                           <span key={genres} className={style.genresSpan}>{genres}</span>
+                           <span key={index} className={style.genresSpan}>{genres}</span>
                         )
                      })}
                   </div>}
@@ -167,53 +167,63 @@ const FormCreateGame = () => {
          </div>
 
          <div className={style.formDiv}>
-            <h1>You can add a new game to the library!</h1>
+            <h1 className={style.addNewGame}>You can add a new game to the library!</h1>
             <form onSubmit={handleSubmit}>
-               <label htmlFor="name">Name (3 characters min): </label>
-               <input
-                  name="name"
-                  id="name"
-                  type="text"
-                  placeholder="Enter the game name..."
-                  autoComplete="off"
-                  value={gameData.name}
-                  onChange={handleChange}
-               />
-               {errors.name ? <span className={style.errorText}>{errors.name}</span> : ""}
+               <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                  <label htmlFor="name">Name (3 characters min):
+                  <input
+                     name="name"
+                     id="name"
+                     type="text"
+                     placeholder="Enter the game name..."
+                     autoComplete="off"
+                     value={gameData.name}
+                     onChange={handleChange}
+                     className={style.inputForm}
+                  /></label>
+                  {errors.name ? <span className={style.errorText}>{errors.name}</span> : ""}
+               </div>
 
                <hr />
 
-               <label htmlFor="image">Image URL: </label>
-               <input
-                  name="image"
-                  id="image"
-                  type="text"
-                  placeholder="Enter the image URL.."
-                  autoComplete="off"
-                  value={gameData.image}
-                  onChange={handleChange}
-               />
-               {errors.image ? <span className={style.errorText}>{errors.image}</span> : ""}
+               <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                  <label htmlFor="image">Image URL:
+                  <input
+                     name="image"
+                     id="image"
+                     type="text"
+                     placeholder="Enter the image URL.."
+                     autoComplete="off"
+                     value={gameData.image}
+                     onChange={handleChange}
+                     className={style.inputForm}
+                  /></label>
+                  {errors.image ? <span className={style.errorText}>{errors.image}</span> : ""}
+               </div>
 
                <hr />
 
-               <label htmlFor="description">Description: </label>
-               <textarea
-                  name="description"
-                  id="description"
-                  cols="30"
-                  rows="5"
-                  placeholder="Describe the game here..."
-                  value={gameData.description}
-                  onChange={handleChange}
-               ></textarea>
-               {errors.description ? <span className={style.errorText}>{errors.description}</span> : ""}
+               <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                  <label htmlFor="description">Description:
+                  <textarea
+                     name="description"
+                     id="description"
+                     cols="30"
+                     rows="5"
+                     placeholder="Describe the game here..."
+                     value={gameData.description}
+                     onChange={handleChange}
+                        className={style.inputForm}
+                        style={{height: 40}}
+                  ></textarea></label>
+                  {errors.description ? <span className={style.errorText}>{errors.description}</span> : ""}
+               </div>
 
                <hr />
 
                <fieldset>
-                  <legend>Choose the platforms</legend>
-                  <p>Trending platforms: </p>
+                  <legend style={{marginBottom: 5}}>Choose the platforms</legend>
+                  <p style={{margin: 0, fontSize: "small", marginBottom: 5}}>Trending platforms: </p>
                   <div>
                      <label style={{ paddingRight: "15px" }}>
                         <input
@@ -309,7 +319,7 @@ const FormCreateGame = () => {
                   <div>
                      <label>
                         Other:
-                        <select style={{ marginLeft: "15px" }} name="Other" defaultValue="Choose" onChange={handlePlatforms}>
+                        <select className={style.selectForm} name="Other" defaultValue="Choose" onChange={handlePlatforms}>
                            <option value="Choose" disabled>show more</option>
                            <option value="Nintendo 3DS">Nintendo 3DS</option>
                            <option value="Nintendo DS">Nintendo DS</option>
@@ -332,7 +342,7 @@ const FormCreateGame = () => {
                               !trendingPlatforms.includes(platform)
                                  ? <span key={platform}>
                                     <span style={{ paddingLeft: "17px" }}>{platform}</span>
-                                    <button style={{marginLeft: "5px"}} onClick={() => {onClose(platform)}}>X</button>
+                                    <button className={style.closeButton} onClick={() => {onClose(platform)}}>✖</button>
                                  </span>
                                  : ""
                            )
@@ -344,37 +354,45 @@ const FormCreateGame = () => {
 
                <hr />
 
-               <label htmlFor="releaseDate">Release date: </label>
-               <input
-                  name="releaseDate"
-                  id="releaseDate"
-                  type="date"
-                  value={gameData.releaseDate}
-                  onChange={handleChange}
-                  min="1958-10-01"
-                  max="2024-01-01"
-                  required
-               />
-               {errors.releaseDate ? <span className={style.errorText}>{errors.releaseDate}</span> : ""}
+               <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                  <label htmlFor="releaseDate">Release date:
+                  <input
+                     name="releaseDate"
+                     id="releaseDate"
+                     type="date"
+                     value={gameData.releaseDate}
+                     onChange={handleChange}
+                     min="1958-10-01"
+                     max="2024-01-01"
+                     required
+                     className={style.inputForm}
+                     style={{width: 110}}
+                  /></label>
+                  {errors.releaseDate ? <span className={style.errorText}>{errors.releaseDate}</span> : ""}
+               </div>
 
                <hr />
 
-               <label htmlFor="rating">Rating (between 0 and 5): </label>
-               <input
-                  name="rating"
-                  id="rating"
-                  type="number"
-                  value={gameData.rating}
-                  onChange={handleChange}
-                  step=".01"
-               />
-               {errors.rating ? <span className={style.errorText}>{errors.rating}</span> : ""}
+               <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                  <label htmlFor="rating">Rating (between 0 and 5):
+                  <input
+                     name="rating"
+                     id="rating"
+                     type="number"
+                     value={gameData.rating}
+                     onChange={handleChange}
+                     step=".01"
+                     className={style.inputForm}
+                     style={{width: 50}}
+                  /></label>
+                  {errors.rating ? <span className={style.errorText}>{errors.rating}</span> : ""}
+               </div>
 
                <hr />
 
                <label>
                   Add genres:
-                  <select style={{ marginLeft: "15px" }} name="Genres" defaultValue="Choose" onChange={handleSelectGenres}>
+                  <select className={style.selectForm} name="Genres" defaultValue="Choose" onChange={handleSelectGenres}>
                      <option value="Choose" disabled>show more</option>
                      <option value="Action">Action</option>
                      <option value="Adventure">Adventure</option>
@@ -401,7 +419,8 @@ const FormCreateGame = () => {
                   {gameData.genres.map((genre) => {
                      return (
                         <span key={genre}>
-                           <span style={{ paddingLeft: "15px" }}>{genre}</span> <button onClick={() => { onClose(genre) }}>X</button>
+                           <span style={{ paddingLeft: "15px" }}>{genre}</span>
+                           <button className={style.closeButton} onClick={() => { onClose(genre) }}>✖</button>
                         </span>
                      )
                   })}
@@ -410,7 +429,7 @@ const FormCreateGame = () => {
 
                <hr />
 
-               <button disabled={Object.keys(errors).length !== 0 || gameData.name === ""} style={{ cursor: "pointer" }}>Upload</button>
+               <button disabled={Object.keys(errors).length !== 0 || gameData.name === ""} className={style.uploadButton}>Upload</button>
             </form>
          </div>
       </div>
