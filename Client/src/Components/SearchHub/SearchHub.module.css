@@ -156,7 +156,7 @@
 
 .filterMenuOption {
    display: flex;
-   flex-direction: column;
+   flex-direction: row;
    height: 50%;
    align-items: center;
    justify-content: center;
@@ -164,4 +164,26 @@
 .filterMenuOption h4 {
    font-size: larger;
    font-weight: lighter;
+   width: 30%;
+}
+.filterMenuOption label {
+   font-weight: lighter;
+   font-size: medium;
+}
+
+.divFilterContainer {
+   width: 60%;
+   height: 50%;
+   display: flex;
+   flex-direction: column;
+   align-items: start;
+   margin-left: 16px;
+   justify-content: space-between;
+}
+
+.selectFilter {
+   background-color: #cccccc;
+   border: none;
+   border-bottom: #969696 1px solid;
+   width: 120px;
 }

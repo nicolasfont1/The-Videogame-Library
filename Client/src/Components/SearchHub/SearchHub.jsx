@@ -136,49 +136,53 @@ const SearchBar = () => {
                <div className={style.filterMenuDiv} onMouseLeave={toggleMenu}>
                   <img src={Filter} className={style.filterImage} style={{ left: "20px" }}/>
                   
-                  <div className={style.filterMenuOption}>
+                  <section className={style.filterMenuOption}>
                      <h4 style={{ margin: "0px" }}>Order by</h4>
-                     <label>
-                        Alphabetical:
-                     
-                        <select style={{ marginLeft: "15px" }} name="alphabeticalOrder" defaultValue="Choose" onChange={handleOrder}>
-                           <option value="Choose" disabled>show</option>
-                           <option value="asc">A-Z</option>
-                           <option value="des">Z-A</option>
-                        </select>
-                     </label>
-                     <label>
-                        Rating:
-                        <select style={{ marginLeft: "15px" }} name="ratingOrder" defaultValue="Choose" onChange={handleOrder}>
-                           <option value="Choose" disabled>show</option>
-                           <option value="max">Max-min</option>
-                           <option value="min">Min-max</option>
-                        </select>
-                     </label>
-                  </div>
+                     <div className={style.divFilterContainer}>
+                        <label>
+                           Alphabetical:
+                        
+                           <select className={style.selectFilter} style={{ marginLeft: "15px" }} name="alphabeticalOrder" defaultValue="Choose" onChange={handleOrder}>
+                              <option value="Choose" disabled>show</option>
+                              <option value="asc">A-Z</option>
+                              <option value="des">Z-A</option>
+                           </select>
+                        </label>
+                        <label>
+                           Rating:
+                           <select className={style.selectFilter} style={{ marginLeft: "15px" }} name="ratingOrder" defaultValue="Choose" onChange={handleOrder}>
+                              <option value="Choose" disabled>show</option>
+                              <option value="max">Max-min</option>
+                              <option value="min">Min-max</option>
+                           </select>
+                        </label>
+                     </div>
+                  </section>
 
                   <div className={style.filterMenuOption}>
                      <h4 style={{ margin: "0px" }}>Filter by</h4>
-                     <label>
-                        Genre:
-                        <select style={{ marginLeft: "15px" }} name="genreFilter" defaultValue="Choose" onChange={handleFilter}>
-                           <option value="Choose" disabled>show</option>
-                           {allApiGenres.map((genre, index) => {
-                              return (
-                                 <option key={index} value={genre.name}>{genre.name}</option>
-                              )
-                           })}
-                        </select>
-                     </label>
-                     <label>
-                        Added by:
-                        <select style={{ marginLeft: "15px" }} name="addedBy" defaultValue="Choose" onChange={handleFilter}>
-                           <option value="Choose" disabled>show</option>
-                           <option value="any">Any</option>
-                           <option value="API">API</option>
-                           <option value="user">User</option>
-                        </select>
-                     </label>
+                     <div className={style.divFilterContainer}>
+                        <label>
+                           Genre:
+                           <select className={style.selectFilter} style={{ marginLeft: "15px" }} name="genreFilter" defaultValue="Choose" onChange={handleFilter}>
+                              <option value="Choose" disabled>show</option>
+                              {allApiGenres.map((genre, index) => {
+                                 return (
+                                    <option key={index} value={genre.name}>{genre.name}</option>
+                                 )
+                              })}
+                           </select>
+                        </label>
+                        <label>
+                           Added by:
+                           <select className={style.selectFilter} style={{ marginLeft: "15px" }} name="addedBy" defaultValue="Choose" onChange={handleFilter}>
+                              <option value="Choose" disabled>show</option>
+                              <option value="any">Any</option>
+                              <option value="API">API</option>
+                              <option value="user">User</option>
+                           </select>
+                        </label>
+                     </div>
                   </div>
                   
                </div>}
