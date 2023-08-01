@@ -8,16 +8,16 @@ const Cards = ({globalVideogames}) => {
     return(
         <div className={style.containerDiv}>
             { // *Observar el "?" al final de globalVideogames.
-                globalVideogames?.map((game) => {
+                globalVideogames?.map((game, index) => {
                     return <Card
                         key={game.id}
                         id={game.id}
                         name={game.name}
                         image={game.image}
-                        genres={game.genres?.map((genre) => genre.name + " ")}
+                        genres={game.genres?.map((genre) => genre.name).join(" - ")}
                     />
                 })
-            }
+            }   
         </div>
     )
 };
