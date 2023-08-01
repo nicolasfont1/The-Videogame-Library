@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllHomepage, pageIsLoading, getApiGenres } from "../../Redux/actions"
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import WhiteLinkedinLogo from "../../Resources/white-linkedin.svg"
+import WhiteGithubLogo from "../../Resources/white-github.svg"
 
 const HomePage = () => {
    let globalVideogames = useSelector((state) => state.globalVideogames); // globalVideogames contiene los juegos que estoy mostrando.
@@ -35,7 +37,7 @@ const HomePage = () => {
    }, [globalVideogames])
 
    return (
-      <div className={style.homepageDiv}>
+      <main className={style.homepageDiv}>
          {pageLoading && <span className={style.loader}></span>}
          <div className={style.communityDiv} style={pageLoading ? { opacity: "0.3" } : { opacity: "1" }}>
             <div className={style.wordsDiv}>
@@ -47,6 +49,18 @@ const HomePage = () => {
                <button className={style.addButton}>ADD GAME</button>
             </Link>
             <div className={style.informationDiv}>
+            </div>
+            <div className={style.socialMediaDiv}>
+               <Link to={"https://www.linkedin.com/in/nicolasfont1/"} target="_blank">
+                  <button className={style.footerSocialMediaButton}>
+                     <img style={{ transform: 'translateY(1px)' }} width="45" height="45" src={WhiteLinkedinLogo} alt="linkedin--v1"/>
+                  </button>
+               </Link>
+               <Link to={"https://github.com/nicolasfont1/"} target="_blank">
+                  <button className={style.footerSocialMediaButton}>
+                     <img style={{ transform: 'translateY(1px)' }} width="45" height="45" src={WhiteGithubLogo} alt="linkedin--v1"/>
+                  </button>
+               </Link>
             </div>
          </div>
          <SearchHub/>
@@ -63,7 +77,28 @@ const HomePage = () => {
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
          />}
-      </div>
+         {globalVideogames.length && <footer className={style.footerDiv}>
+            <p className={style.reachMeAt}>Reach me at</p>
+            <div className={style.footerSocialMediaDiv}>
+               <Link to={"https://www.linkedin.com/in/nicolasfont1/"} target="_blank">
+                  <button className={style.footerSocialMediaButton}>
+                     <img style={{ transform: 'translateY(1px)' }} width="35" height="35" src="https://img.icons8.com/material/24/linkedin--v1.png" alt="linkedin--v1"/>
+                  </button>
+               </Link>
+               <Link to={"https://github.com/nicolasfont1/"} target="_blank">
+                  <button className={style.footerSocialMediaButton}>
+                     <img style={{ transform: 'translateY(1px)' }} width="35" height="35" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Font_Awesome_5_brands_github.svg" alt="linkedin--v1"/>
+                  </button>
+               </Link>
+            </div>
+            <p style={{fontSize: "small", fontWeight: "lighter", margin: 0, color: "gray", cursor: "default"}}>or also you can send me an email to</p>
+            <div className={style.divEmail}>
+               <span className={style.meHarte} style={{ fontSize: "small", color: "gray"}}>This project is running thanks to the <a href="https://rawg.io/apidocs" target="_blank" style={{color: "white"}}>RAWG API</a></span>
+               <span className={style.meHarte} style={{ color: "gray"}}>nicolasfont15@gmail.com</span>
+               <span className={style.meHarte} style={{ fontSize: "small", color: "gray"}}>Page made for the <a href="https://www.soyhenry.com/" target="_blank" style={{color: "white"}}>soyHenry</a> bootcamp</span>
+            </div>
+         </footer>}
+      </main>
    )
 }
 

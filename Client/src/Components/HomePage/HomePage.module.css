@@ -35,6 +35,7 @@
    width: 60%;
    height: 595px;
    margin-left: 90px;
+   cursor: default;
 }
 
 .addButton {
@@ -63,6 +64,27 @@
 
 .informationDiv {
    width: 40%;
+}
+
+.socialMediaDiv {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   height: 110px;
+   justify-content: space-around;
+   right: 5px;
+   top: 45px;
+}
+.socialMediaDiv button {
+   cursor: pointer;
+   border-radius: 50%;
+   height: 65px;
+   border: none;
+   background-color: #313e49b4;
+   margin-left: 10px;
+   margin-right: 10px;
+   padding: 10px;
+   margin: 15px;
 }
 
 
@@ -433,4 +455,60 @@
          -20px -20px transparent,
          -10px -30px transparent;
    }
+}
+
+.footerDiv {
+   background-color: #181f25;
+   margin-top: 20px;
+   height: fit-content;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.footerSocialMediaDiv {
+   display: flex;
+   flex-direction: row;
+   margin-bottom: 15px;
+}
+
+.reachMeAt {
+   font-family: EightBit;
+   margin: 10px;
+   cursor: default;
+}
+
+.footerSocialMediaButton {
+   cursor: pointer;
+   border-radius: 50%;
+   height: 45px;
+   width: auto;
+   border: none;
+   background-color: #313e49b4;
+   margin-left: 10px;
+   margin-right: 10px;
+   transform: scale(1);
+   filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+   transition: filter 0.4s ease-in-out, transform 0.2s ease-in-out;
+}
+.footerSocialMediaButton:hover {
+   transform: scale(1.05);
+   transition: transform 0.1s ease-in-out;
+   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.divEmail {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   width: 100%;
+   align-items: center;
+   margin-bottom: 15px;
+   cursor: default;
+}
+
+.meHarte {
+   width: 33%;
 }
